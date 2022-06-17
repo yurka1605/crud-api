@@ -6,25 +6,34 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf build/ && prettier --write src/ && tsc",
-    "start:dev": "nodemon src/app.ts",
-    "start:prod": "node src/app.ts",
-    "start:multi": ""
+    "start:dev": "nodemon",
+    "start:prod": "npm run build && node ./dist/app.js",
+    "start:multi": "npm run build"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.42",
+    "@types/uuid": "^8.3.4",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "nodemon": "^2.0.16",
+    "prettier": "2.7.1",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yurka1605/crud-api.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Iurii Litvinov",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/yurka1605/crud-api/issues"
   },
-  "homepage": "https://github.com/yurka1605/crud-api#readme",
-  "devDependencies": {
-    "@tsconfig/node16": "^1.0.3",
-    "nodemon": "^2.0.16",
-    "ts-node": "^10.8.1",
-    "typescript": "^4.7.3"
-  }
+  "homepage": "https://github.com/yurka1605/crud-api#readme"
 }
