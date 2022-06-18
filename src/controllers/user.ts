@@ -6,7 +6,7 @@ import {
   setResponseInvalidDataType,
   setResponseInvalidUserId,
   setResponseMissingRequireData,
-  setResponseUserNotExist
+  setResponseUserNotExist,
 } from '../helpers';
 
 export class User {
@@ -33,7 +33,7 @@ export class User {
       id: uuidv4(),
       username,
       age,
-      hobbies
+      hobbies,
     };
     this._users.push(newUser);
 
@@ -143,7 +143,7 @@ export class User {
       return;
     }
 
-    this._users = this._users.filter(user => user.id !== deletedUser.id);
+    this._users = this._users.filter((user) => user.id !== deletedUser.id);
     res.writeHead(ResponseCodes.NO_CONTENT).end();
   }
 

@@ -1,6 +1,9 @@
 # Dependency directories
 node_modules/
 
+# Builds
+dist/
+
 # dotenv environment variables file
 .env
 .env.test
