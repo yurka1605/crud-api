@@ -3,17 +3,17 @@ import { createServer, RequestListener, Server } from 'http';
 import Router from './router';
 import { ErrorsEnum, ResponseCodes, RequestTypeEnum } from './models';
 import { debug, parseUrl, error as printError, log, logData } from './helpers';
-import { defaultHost, defaultPort } from './constants';
+import { defaultHost, defaultPort, serverErrorMessage } from './constants';
 
-class App {
+export default class App {
   PORT: number;
   HOST: string;
   server: Server;
   router: Router;
 
   constructor(port?: number, host?: string) {
-    this.PORT = port || defaultPort;
-    this.HOST = host || defaultHost;
+    this.PORT = port || +(<string>process.env.PORT) || defaultPort;
+    this.HOST = host || process.env.HOST || defaultHost;
     this.server = createServer(this.listener);
     this.router = new Router();
   }
@@ -24,6 +24,7 @@ class App {
 
   private listener: RequestListener = async (req, res) => {
     try {
+      debug(`Worker pid is ${process.pid.toString()}`);
       req.url = parseUrl(<string>req.url);
 
       const resMethod = <RequestTypeEnum>req.method;
@@ -40,11 +41,8 @@ class App {
     } catch (error: any) {
       printError(ErrorsEnum.SERVER);
       log(error);
-      res.writeHead(ResponseCodes.SERVER_ERROR, error?.message);
-      res.end(ErrorsEnum.SERVER);
+      res.writeHead(ResponseCodes.SERVER_ERROR, ErrorsEnum.SERVER);
+      res.end(serverErrorMessage);
     }
   };
 }
-
-const app = new App(+(<string>process.env.PORT), process.env.HOST);
-app.runServer();

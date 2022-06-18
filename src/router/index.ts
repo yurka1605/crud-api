@@ -1,12 +1,12 @@
 import { IRouteConfig } from '../models';
 import { urlIdentifier } from '../constants';
-import { routes as userRoutes } from './user';
+import { initUserRoutes } from './user';
 
 export default class Router {
   private _routes: Array<IRouteConfig> = [];
 
   constructor() {
-    this._routes.push(...userRoutes);
+    this._routes.push(...initUserRoutes());
   }
 
   public getCurrentRouteConfig(url: string): IRouteConfig | null {
