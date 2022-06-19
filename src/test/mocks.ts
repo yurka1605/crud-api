@@ -1,3 +1,4 @@
+import { IState } from 'models/state';
 import { IUser } from './../models/user';
 export const mockData = {
   user: {
@@ -17,3 +18,8 @@ export const mockData = {
 } as {
   [key: string]: Omit<IUser, 'id'> | Pick<IUser, 'age' | 'hobbies'>;
 };
+
+export const serverSettings: { state: IState, port: number } = {
+  state: { users: [] },
+  port: 6000,
+}

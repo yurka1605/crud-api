@@ -2,7 +2,7 @@ import { Server } from 'http';
 import { ContentTypes, IUser, ResponseCodes } from '../models';
 import request from 'supertest';
 import App from '../app';
-import { mockData } from './mocks';
+import { mockData, serverSettings } from './mocks';
 
 describe('Users CRUD API:', () => {
   let server: Server;
@@ -13,7 +13,8 @@ describe('Users CRUD API:', () => {
   beforeAll(() => {
     userData = <Omit<IUser, "id">>mockData.user;
     updatedUser = <Omit<IUser, "id">>mockData.updatedUser;
-    server = new App({ users: [] }).server;
+    const { state, port } = serverSettings;
+    server = new App(state, port).server;
   });
 
   it('should get all users', async () => {

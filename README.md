@@ -30,3 +30,9 @@
 | Run tests scenarios            | `npm test`                      |
 
 note: `*`- this steps is required for correct project works
+
+## tests
+
+`npm test` - run tests
+
+Note: Port 6000 is used to start the server for tests

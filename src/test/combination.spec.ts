@@ -2,7 +2,7 @@ import { Server } from 'http';
 import { ContentTypes, IUser, ResponseCodes } from '../models';
 import request from 'supertest';
 import App from '../app';
-import { mockData } from './mocks';
+import { mockData, serverSettings } from './mocks';
 
 describe('Api test 3:', () => {
   let server: Server;
@@ -14,7 +14,8 @@ describe('Api test 3:', () => {
   beforeAll(() => {
     userData = <Omit<IUser, "id">>mockData.user;
     updatedUser = <Omit<IUser, "id">>mockData.updatedUser;
-    server = new App({ users: [] }).server;
+    const { state, port } = serverSettings;
+    server = new App(state, port).server;
   });
 
   it('should create new user', async () => {

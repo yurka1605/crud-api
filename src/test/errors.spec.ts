@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ErrorsEnum, IUser, ResponseCodes } from '../models';
 import request from 'supertest';
 import App from '../app';
-import { mockData } from './mocks';
+import { mockData, serverSettings } from './mocks';
 import { serverErrorMessage } from '../constants';
 
 describe('Checking return errors:', () => {
@@ -15,7 +15,8 @@ describe('Checking return errors:', () => {
   beforeAll(() => {
     invalidUserData = <Pick<IUser, 'age' | 'hobbies'>>mockData.invalidUserData;
     uuidId = uuidv4();
-    server = new App({ users: [] }).server;
+    const { state, port } = serverSettings;
+    server = new App(state, port).server;
   });
 
   it('should return error - Api method not found', async () => {
