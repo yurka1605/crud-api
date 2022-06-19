@@ -93,7 +93,8 @@ export class User {
     user.hobbies = hobbies;
     user.username = username;
 
-    res.writeHead(ResponseCodes.OK).end();
+    res.writeHead(ResponseCodes.OK, { 'Content-type': ContentTypes.JSON });
+    res.end(JSON.stringify(user));
   }
 
   public async patch(req: IncomingMessage, res: ServerResponse): Promise<void> {
@@ -126,7 +127,8 @@ export class User {
     user.hobbies = hobbies ?? user.hobbies;
     user.username = username ?? user.username;
 
-    res.writeHead(ResponseCodes.OK).end();
+    res.writeHead(ResponseCodes.OK, { 'Content-type': ContentTypes.JSON });
+    res.end(JSON.stringify(user));
   }
 
   public delete(req: IncomingMessage, res: ServerResponse) {
