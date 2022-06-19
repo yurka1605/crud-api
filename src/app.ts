@@ -30,7 +30,6 @@ export default class App {
     try {
       debug(`Worker pid is ${process.pid.toString()}`);
       req.url = parseUrl(<string>req.url);
-      log(this.state);
 
       const resMethod = <RequestTypeEnum>req.method;
       const config = this.router.getCurrentRouteConfig(req.url);
