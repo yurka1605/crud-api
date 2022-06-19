@@ -29,7 +29,7 @@
 | Build and run a server cluster | `npm run start:multi`           |
 | Run tests scenarios            | `npm test`                      |
 
-note: `*`- this steps is required for correct project works
+> NOTE: `*`- this steps is required for correct project works
 
 ## tests
 
