@@ -19,7 +19,7 @@ export default class App {
     this.HOST = host || process.env.HOST || defaultHost;
     this.state = state;
     this.server = createServer(this.listener);
-    this.router = new Router(initUserRoutes(state.users));
+    this.router = new Router(initUserRoutes(this.state.users));
   }
 
   public runServer() {
@@ -38,6 +38,7 @@ export default class App {
       if (action) {
         await action(req, res);
         logData(<string>req.method, req.url, res.statusCode, res.statusMessage);
+        process.send!(this.state);
       } else {
         res.writeHead(ResponseCodes.NOT_FOUND, ErrorsEnum.API);
         res.end(ErrorsEnum.API);
