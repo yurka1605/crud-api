@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:@typescript-eslint/recommended"],
+  "rules": {
+    "quotes": ["error", "single"],
+    "no-console": "error",
+    "array-bracket-spacing": ["warn", "never"],
+    "object-curly-spacing": ["warn", "never"],
+    "no-duplicate-imports": "error"
+  }
+}
