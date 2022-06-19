@@ -22,9 +22,11 @@
 
 | Name                           | Action                          |
 | ------------------------------ | ------------------------------- |
-| Install dependencies           | `npm install`                   |
-| Add `.env` file                | Rename `.env.example` to `.env` |
+| \*Install dependencies         | `npm install`                   |
+| \*Add `.env` file              | Rename `.env.example` to `.env` |
 | Run dev server                 | `npm run start:dev`             |
 | Build and run prod server      | `npm run start:prod`            |
 | Build and run a server cluster | `npm run start:multi`           |
 | Run tests scenarios            | `npm test`                      |
+
+note: `*`- this steps is required for correct project works
