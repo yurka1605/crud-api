@@ -39,7 +39,7 @@ export default class App {
         await action(req, res);
         logData(<string>req.method, req.url, res.statusCode, res.statusMessage);
         if (process.send && process.argv.includes('--multi')) {
-          process.send!(this.state);
+          process.send(this.state);
         }
       } else {
         res.writeHead(ResponseCodes.NOT_FOUND, ErrorsEnum.API);
