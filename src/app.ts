@@ -15,7 +15,7 @@ export default class App {
   state: IState;
 
   constructor(state: IState, port?: number, host?: string) {
-    this.PORT = port || +(<string>process.env.PORT) || defaultPort;
+    this.PORT = port || Number(process.env.PORT) || defaultPort;
     this.HOST = host || process.env.HOST || defaultHost;
     this.state = state;
     this.server = createServer(this.listener);
