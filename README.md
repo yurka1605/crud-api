@@ -35,4 +35,4 @@ note: `*`- this steps is required for correct project works
 
 `npm test` - run tests
 
-Note: Port 6000 is used to start the server for tests
+> NOTE: Port 6000 is used to start the server for tests
