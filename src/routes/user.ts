@@ -1,8 +1,8 @@
-import { User } from './../controllers/user';
-import { IRouteConfig, RequestTypeEnum } from '../models';
+import { User } from '../controllers/user';
+import { IRouteConfig, IUser, RequestTypeEnum } from '../models';
 
-export function initUserRoutes() {
-  const controller = new User([]);
+export function initUserRoutes(state: Array<IUser>) {
+  const controller = new User(state);
   return <IRouteConfig[]>[
     {
       name: 'api/users',

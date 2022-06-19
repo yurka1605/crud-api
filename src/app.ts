@@ -4,18 +4,22 @@ import Router from './router';
 import { ErrorsEnum, ResponseCodes, RequestTypeEnum } from './models';
 import { debug, parseUrl, error as printError, log, logData } from './helpers';
 import { defaultHost, defaultPort, serverErrorMessage } from './constants';
+import { IState } from './models';
+import { initUserRoutes } from './routes';
 
 export default class App {
   PORT: number;
   HOST: string;
   server: Server;
   router: Router;
+  state: IState;
 
-  constructor(port?: number, host?: string) {
+  constructor(state: IState, port?: number, host?: string) {
     this.PORT = port || +(<string>process.env.PORT) || defaultPort;
     this.HOST = host || process.env.HOST || defaultHost;
+    this.state = state;
     this.server = createServer(this.listener);
-    this.router = new Router();
+    this.router = new Router(initUserRoutes(state.users));
   }
 
   public runServer() {
@@ -26,6 +30,7 @@ export default class App {
     try {
       debug(`Worker pid is ${process.pid.toString()}`);
       req.url = parseUrl(<string>req.url);
+      log(this.state);
 
       const resMethod = <RequestTypeEnum>req.method;
       const config = this.router.getCurrentRouteConfig(req.url);
