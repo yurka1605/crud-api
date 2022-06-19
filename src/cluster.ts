@@ -30,7 +30,7 @@ export class ClusterApp {
     let app: App;
     process.on('message', (state: IState) => {
       if (!app) {
-        app = new App(state, process.pid);
+        app = new App(state);
         app.runServer();
       } else {
         app.state = state;

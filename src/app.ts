@@ -38,7 +38,7 @@ export default class App {
       if (action) {
         await action(req, res);
         logData(<string>req.method, req.url, res.statusCode, res.statusMessage);
-        if (process.send && process.argv.includes('--multi')) {
+        if (process.send) {
           process.send(this.state);
         }
       } else {
