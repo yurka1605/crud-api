@@ -11,8 +11,8 @@ describe('Users CRUD API:', () => {
   let userId: string;
 
   beforeAll(() => {
-    userData = <Omit<IUser, "id">>mockData.user;
-    updatedUser = <Omit<IUser, "id">>mockData.updatedUser;
+    userData = <Omit<IUser, 'id'>>mockData.user;
+    updatedUser = <Omit<IUser, 'id'>>mockData.updatedUser;
     const { state, port } = serverSettings;
     server = new App(state, port).server;
   });
@@ -25,15 +25,13 @@ describe('Users CRUD API:', () => {
   });
 
   it('should create new user', async () => {
-    const res = await request(server)
-      .post('/api/users')
-      .send(userData);
+    const res = await request(server).post('/api/users').send(userData);
     userId = res.body.id;
     expect(res.statusCode).toBe(ResponseCodes.CREATED);
     expect(res.type).toBe(ContentTypes.JSON);
     expect(res.body).toEqual({
       id: userId,
-      ...userData
+      ...userData,
     });
   });
 
@@ -43,26 +41,23 @@ describe('Users CRUD API:', () => {
     expect(res.type).toBe(ContentTypes.JSON);
     expect(res.body).toEqual({
       id: userId,
-      ...userData
+      ...userData,
     });
   });
 
   it('should changed user data', async () => {
-    const res = await request(server)
-      .put(`/api/users/${userId}`)
-      .send(updatedUser);
+    const res = await request(server).put(`/api/users/${userId}`).send(updatedUser);
 
     expect(res.statusCode).toBe(ResponseCodes.OK);
     expect(res.type).toEqual(ContentTypes.JSON);
     expect(res.body).toEqual({
       id: userId,
-      ...updatedUser
+      ...updatedUser,
     });
   });
 
   it('should delete user', async () => {
-    const res = await request(server)
-      .delete(`/api/users/${userId}`);
+    const res = await request(server).delete(`/api/users/${userId}`);
 
     expect(res.statusCode).toBe(ResponseCodes.NO_CONTENT);
     expect(res.body).toEqual({});

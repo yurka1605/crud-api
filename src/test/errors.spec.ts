@@ -25,9 +25,7 @@ describe('Checking return errors:', () => {
   });
 
   it('should get error invalid input data', async () => {
-    const res = await request(server)
-      .post('/api/users')
-      .send(invalidUserData);
+    const res = await request(server).post('/api/users').send(invalidUserData);
     expect(res.statusCode).toBe(ResponseCodes.BAD_REQUEST);
     expect(res.text).toBe(ErrorsEnum.REQUIRED_PARAMS_MISSING);
   });
@@ -44,17 +42,13 @@ describe('Checking return errors:', () => {
   });
 
   it('should get internal server error', async () => {
-    const res = await request(server)
-      .post('/api/users')
-      .send('');
+    const res = await request(server).post('/api/users').send('');
     expect(res.statusCode).toBe(ResponseCodes.SERVER_ERROR);
     expect(res.text).toEqual(serverErrorMessage);
   });
 
   it('should get error - invalid id format', async () => {
-    const res = await request(server)
-      .put(`/api/users/${invalidId}`)
-      .send({});
+    const res = await request(server).put(`/api/users/${invalidId}`).send({});
 
     expect(res.statusCode).toBe(ResponseCodes.BAD_REQUEST);
     expect(res.text).toEqual(ErrorsEnum.INVALID_ID);

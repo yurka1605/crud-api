@@ -12,35 +12,31 @@ describe('Api test 3:', () => {
   let user2Id: string;
 
   beforeAll(() => {
-    userData = <Omit<IUser, "id">>mockData.user;
-    updatedUser = <Omit<IUser, "id">>mockData.updatedUser;
+    userData = <Omit<IUser, 'id'>>mockData.user;
+    updatedUser = <Omit<IUser, 'id'>>mockData.updatedUser;
     const { state, port } = serverSettings;
     server = new App(state, port).server;
   });
 
   it('should create new user', async () => {
-    const res = await request(server)
-      .post('/api/users')
-      .send(userData);
+    const res = await request(server).post('/api/users').send(userData);
     user1Id = res.body.id;
     expect(res.statusCode).toBe(ResponseCodes.CREATED);
     expect(res.type).toBe(ContentTypes.JSON);
     expect(res.body).toEqual({
       id: user1Id,
-      ...userData
+      ...userData,
     });
   });
 
   it('should create second user', async () => {
-    const res = await request(server)
-      .post('/api/users')
-      .send(userData);
+    const res = await request(server).post('/api/users').send(userData);
     user2Id = res.body.id;
     expect(res.statusCode).toBe(ResponseCodes.CREATED);
     expect(res.type).toBe(ContentTypes.JSON);
     expect(res.body).toEqual({
       id: user2Id,
-      ...userData
+      ...userData,
     });
   });
 
@@ -52,23 +48,19 @@ describe('Api test 3:', () => {
     expect(res.body).toEqual([
       {
         id: user1Id,
-        ...userData
+        ...userData,
       },
       {
         id: user2Id,
-        ...userData
-      }
+        ...userData,
+      },
     ]);
   });
 
   it('should changed part of user data', async () => {
     const { age, hobbies } = updatedUser;
-    const resByUser1 = await request(server)
-      .patch(`/api/users/${user1Id}`)
-      .send({ age, hobbies });
-    const resByUser2 = await request(server)
-      .patch(`/api/users/${user1Id}`)
-      .send({ age });
+    const resByUser1 = await request(server).patch(`/api/users/${user1Id}`).send({ age, hobbies });
+    const resByUser2 = await request(server).patch(`/api/users/${user1Id}`).send({ age });
 
     expect(resByUser1.statusCode === resByUser2.statusCode).toBeTruthy();
     expect(resByUser1.body.age === resByUser2.body.age).toBeTruthy();

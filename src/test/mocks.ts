@@ -19,7 +19,7 @@ export const mockData = {
   [key: string]: Omit<IUser, 'id'> | Pick<IUser, 'age' | 'hobbies'>;
 };
 
-export const serverSettings: { state: IState, port: number } = {
+export const serverSettings: { state: IState; port: number } = {
   state: { users: [] },
   port: 6000,
-}
+};
